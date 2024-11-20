@@ -1,45 +1,53 @@
 console.log("Hello World2")
 
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
 
-let getComputerChoice = function() {
-    let cpuChoice = Math.floor(Math.random() * 3)   + 1;
+    function playRound(humanChoice, computerChoice) {
+        // your code here!
+        humanChoice = humanChoice.toLowerCase();
+    
+        if (humanChoice === computerChoice) {
+            console.log("It's a Tie! You both chose " + humanChoice);
+        } else if ( 
+            (humanChoice === "rock" && computerChoice === "scissors") || 
+            (humanChoice === "paper" && computerChoice === "rock") ||
+            (humanChoice === "scissors" && computerChoice === "paper")
+        ) {
+            humanScore++;
+            console.log("You win! " + humanChoice + " beats " + computerChoice + "!!");
+        } else {
+            computerScore++;
+            console.log("WOMP WOMP YOU LOSE! Humanity is one step closer to extiction! " + computerChoice + " beats " + humanChoice + "!!");
+        }   
+    }
+
+    for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+
+}
+
+
+function getComputerChoice() {
+    let cpuChoice = Math.floor(Math.random() * 3) + 1;
 
     if (cpuChoice === 1) {
-        return "Rock"
+        return "rock";
     } else if (cpuChoice === 2) {
-        return "Paper"
+        return "paper";
     } else {
-        return "Scissors"
-    }
-
-}
-
-console.log(getComputerChoice())
-
-let getHumanChoice = function(myChoice) {
-    
-}
-
-
-if (myChoice === cpuChoice) {
-    return "TIE!"
-} else if (myChoice === "Rock") {
-    if (cpuChoice === "Scissors") {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Win!"
-    } else {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Lose!"
-    }
-} else if (myChoice === "Paper") {
-    if (cpuChoice === "Rock") {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Win!"
-    } else {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Lose!"
-    }
-
-} else {
-    if (cpuChoice === "Paper") {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Win!"
-    } else {
-        return "You chose ${myChoice}! Computer chose ${cpuChoice}! You Lose!"
+        return "scissors";
     }
 }
+
+
+function getHumanChoice() {
+    let input = prompt("enter rock, paper, or scissors");
+    return input.toLowerCase();
+}
+
+
